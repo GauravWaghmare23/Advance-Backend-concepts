@@ -21,7 +21,6 @@ const globalErrorHandler = (err, req, res, next) => {
       message: err.message,
     });
   }
-
   //mongoose validation handler
   else if (err.name === "ValidationError") {
     const message = Object.values(err.errors)
@@ -32,7 +31,6 @@ const globalErrorHandler = (err, req, res, next) => {
       message: `Invalid input data: ${message}`,
     });
   }
-
   // unexpected error
   else {
     return res.status(500).json({

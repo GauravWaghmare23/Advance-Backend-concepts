@@ -12,6 +12,7 @@ const { createBasicRateLimiter } = require("./middleware/rateLimiting.js");
 
 // Routes Imports
 const itemsRoutes = require("./routes/item-routes.js");
+const { apiVersioning } = require("./middleware/apiVersioning.js");
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(requestLogger);
 app.use(addTimeStamp);
 app.use(configuredCors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(apiVersioning("v1"));
 
 // Rate Limiting 
 app.use(createBasicRateLimiter());
